@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary (Background / Base) */
+  --midnight-navy: #0B1220;
+  --slate-dark: #111827;
+
+  /* Accent (Actions & Highlights) */
+  --electric-cyan: #22D3EE;
+  --neon-teal: #2DD4BF;
+
+  /* Neutral */
+  --soft-white: #F9FAFB;
+  --cool-gray: #9CA3AF;
+
+  /* Status Colors (QA Influence) */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  /* Base colors */
+  --background: var(--midnight-navy);
+  --foreground: var(--soft-white);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-midnight-navy: var(--midnight-navy);
+  --color-slate-dark: var(--slate-dark);
+  --color-electric-cyan: var(--electric-cyan);
+  --color-neon-teal: var(--neon-teal);
+  --color-soft-white: var(--soft-white);
+  --color-cool-gray: var(--cool-gray);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--midnight-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cool-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--electric-cyan);
+}
+
+/* Selection color */
+::selection {
+  background: var(--electric-cyan);
+  color: var(--midnight-navy);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--electric-cyan);
+  outline-offset: 2px;
 }
