@@ -3,7 +3,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  category: 'web-development' | 'qa-automation';
+  category: 'web-development' | 'qa-automation' | 'capstone';
   problem?: string;
   solution?: string;
   result?: string;
@@ -11,6 +11,7 @@ export interface Project {
   github_url?: string;
   live_url?: string;
   image_url?: string;
+  gallery_images?: string[];
   featured: boolean;
   created_at: string;
 }

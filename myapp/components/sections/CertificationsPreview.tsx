@@ -26,31 +26,37 @@ const featuredCerts = [
   {
     title: 'CCNA: Introduction to Networks',
     issuer: 'Cisco',
+    year: 2023,
     category: 'networking',
   },
   {
-    title: 'Google Cloud Fundamentals',
-    issuer: 'Google Cloud',
+    title: 'Introduction to Generative AI',
+    issuer: 'Google Cloud Badge',
+    year: 2024,
     category: 'cloud',
   },
   {
     title: 'IT Specialist - Python',
     issuer: 'Certiport',
+    year: 2022,
     category: 'programming',
   },
   {
     title: 'IT Specialist - Java',
     issuer: 'Certiport',
+    year: 2022,
     category: 'programming',
   },
   {
-    title: 'Cybersecurity Essentials',
+    title: 'Introduction to Cybersecurity',
     issuer: 'Cisco',
+    year: 2023,
     category: 'cybersecurity',
   },
   {
-    title: 'Data Science Fundamentals',
-    issuer: 'IBM',
+    title: 'Introduction to Data Science',
+    issuer: 'Cisco',
+    year: 2024,
     category: 'data-science',
   },
 ];
@@ -84,14 +90,18 @@ export default function CertificationsPreview() {
             <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 max-w-5xl w-full">
               {featuredCerts.map((cert, index) => (
                 <Card key={index} className="flex items-center gap-4">
-                  <div className={`p-3 rounded-xl ${categoryColors[cert.category]?.bg || 'bg-slate-dark'} flex-shrink-0`}>
+                  <div className={`p-3 rounded-xl ${categoryColors[cert.category]?.bg || 'bg-slate-dark'} shrink-0`}>
                     <Award className={`w-6 h-6 ${categoryColors[cert.category]?.text || 'text-cool-gray'}`} />
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <h4 className="text-soft-white font-medium truncate" title={cert.title}>
                       {cert.title}
                     </h4>
-                    <p className="text-cool-gray text-sm">{cert.issuer}</p>
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="text-cool-gray">{cert.issuer}</span>
+                      <span className="text-cool-gray/50">•</span>
+                      <span className={`${categoryColors[cert.category]?.text || 'text-cool-gray'}`}>{cert.year}</span>
+                    </div>
                   </div>
                 </Card>
               ))}

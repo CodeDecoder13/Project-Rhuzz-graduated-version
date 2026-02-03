@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, MapPin, Send, Download, CheckCircle, AlertCircle } from 'lucide-react';
 import { Container, Card, SectionTitle, Button } from '@/components/ui';
-import { supabase } from '@/lib/supabase';
 import type { ContactMessage } from '@/types';
+
+// Web3Forms access key - Get yours free at https://web3forms.com/
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,20 +30,20 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'contact@rhuzzel.dev',
-    href: 'mailto:contact@rhuzzel.dev',
+    value: 'boyparamio@gmail.com',
+    href: 'mailto:boyparamio@gmail.com',
   },
   {
     icon: Github,
     label: 'GitHub',
-    value: 'github.com/rhuzzel',
-    href: 'https://github.com/rhuzzel',
+    value: 'github.com/CodeDecoder13',
+    href: 'https://github.com/CodeDecoder13',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/rhuzzel-paramio',
-    href: 'https://linkedin.com/in/rhuzzel-paramio',
+    value: 'linkedin.com/in/rhuzz-6904b7187',
+    href: 'https://www.linkedin.com/in/rhuzz-6904b7187/',
   },
   {
     icon: MapPin,
@@ -74,17 +76,33 @@ export default function ContactPage() {
     setErrorMessage('');
 
     try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([formData]);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          from_name: formData.name,
+          email: formData.email,
+          subject: `Portfolio Contact: ${formData.subject}`,
+          message: formData.message,
+          // Additional helpful fields
+          botcheck: '', // honeypot field
+        }),
+      });
 
-      if (error) throw error;
+      const result = await response.json();
 
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-
-      // Reset success message after 5 seconds
-      setTimeout(() => setStatus('idle'), 5000);
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        // Reset success message after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error(result.message || 'Something went wrong');
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       setStatus('error');
@@ -108,7 +126,7 @@ export default function ContactPage() {
             />
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
             {/* Contact Info */}
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-soft-white mb-6">Contact Information</h3>
@@ -148,7 +166,7 @@ export default function ContactPage() {
                     <h4 className="text-soft-white font-semibold mb-1">Download My Resume</h4>
                     <p className="text-cool-gray text-sm">Get a detailed overview of my experience</p>
                   </div>
-                  <a href="/resume.pdf" download>
+                  <a href="/paramio-rhuzzel-cv-updated.pdf" download target="_blank">
                     <Button variant="outline" size="sm">
                       <Download className="w-4 h-4 mr-2" />
                       PDF
@@ -176,7 +194,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-base text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors"
                       placeholder="Your name"
                     />
                   </div>
@@ -193,7 +211,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-base text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -210,7 +228,7 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-base text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors"
                       placeholder="What's this about?"
                     />
                   </div>
@@ -227,7 +245,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-midnight-navy border border-white/10 text-base text-soft-white placeholder-cool-gray focus:border-electric-cyan focus:ring-1 focus:ring-electric-cyan outline-none transition-colors resize-none"
                       placeholder="Tell me about your project or just say hello..."
                     />
                   </div>

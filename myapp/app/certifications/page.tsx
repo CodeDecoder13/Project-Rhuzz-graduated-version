@@ -30,79 +30,55 @@ const certifications: Certification[] = [
     issuer: 'Cisco',
     year: 2023,
     category: 'networking',
-    credential_url: 'https://www.credly.com',
+    credential_url: 'https://www.credly.com/badges/998e9099-f6e8-40fd-8def-7d240fd86efc/public_url',
   },
   {
     id: '2',
-    title: 'CCNA: Switching, Routing, and Wireless Essentials',
-    issuer: 'Cisco',
-    year: 2023,
-    category: 'networking',
-    credential_url: 'https://www.credly.com',
-  },
-  {
-    id: '3',
-    title: 'Google Cloud Fundamentals: Core Infrastructure',
-    issuer: 'Google Cloud',
-    year: 2023,
+    title: 'Introduction to Generative AI',
+    issuer: 'Google Cloud Badge',
+    year: 2024,
     category: 'cloud',
     credential_url: 'https://www.cloudskillsboost.google',
   },
   {
-    id: '4',
+    id: '3',
     title: 'IT Specialist - Python',
     issuer: 'Certiport',
     year: 2022,
     category: 'programming',
-    credential_url: 'https://www.certiport.com',
+    credential_url: 'https://www.credly.com/badges/192e302a-7f5a-44af-a1dd-56d676a9ea63/public_url',
   },
   {
-    id: '5',
+    id: '4',
     title: 'IT Specialist - Java',
     issuer: 'Certiport',
     year: 2022,
     category: 'programming',
-    credential_url: 'https://www.certiport.com',
+    credential_url: 'https://www.credly.com/badges/48368c9a-47e1-4d59-9fac-622f5b0e258e/public_url',
   },
   {
-    id: '6',
-    title: 'IT Specialist - HTML & CSS',
-    issuer: 'Certiport',
-    year: 2022,
-    category: 'programming',
-    credential_url: 'https://www.certiport.com',
-  },
-  {
-    id: '7',
+    id: '5',
     title: 'Introduction to Cybersecurity',
     issuer: 'Cisco',
     year: 2023,
     category: 'cybersecurity',
-    credential_url: 'https://www.netacad.com',
+    credential_url: 'https://www.credly.com/badges/35038e26-7cb0-49ad-a0cb-1eb88d041900/public_url',
   },
   {
-    id: '8',
-    title: 'Cybersecurity Essentials',
+    id: '6',
+    title: 'Introduction to Data Science',
     issuer: 'Cisco',
-    year: 2023,
-    category: 'cybersecurity',
-    credential_url: 'https://www.netacad.com',
-  },
-  {
-    id: '9',
-    title: 'Data Science Fundamentals',
-    issuer: 'IBM',
-    year: 2023,
+    year: 2024,
     category: 'data-science',
-    credential_url: 'https://www.ibm.com',
+    credential_url: 'https://www.credly.com/badges/a6644a3e-c5f5-4214-bbf2-e993e94534d6/public_url',
   },
-  {
-    id: '10',
-    title: 'SQL and Relational Databases',
-    issuer: 'IBM',
+   {
+    id: '7',
+    title: 'DevNet Associate',
+    issuer: 'Cisco',
     year: 2022,
-    category: 'data-science',
-    credential_url: 'https://www.ibm.com',
+    category: 'networking',
+    credential_url: 'https://www.credly.com/badges/4f0a24d2-4484-41e9-921c-37f6781f235b/public_url',
   },
 ];
 
@@ -173,7 +149,7 @@ export default function CertificationsPage() {
                 <span className="text-cool-gray text-sm font-normal">({certs.length} certifications)</span>
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {certs.map((cert) => (
                   <Card key={cert.id} className="group">
                     <div className="flex items-start gap-4">

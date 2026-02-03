@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Container } from '@/components/ui';
+import { Container, Button } from '@/components/ui';
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -58,25 +58,35 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center gap-1" role="menubar">
-            {navItems.map((item) => (
-              <li key={item.href} role="none">
-                <Link
-                  href={item.href}
-                  role="menuitem"
-                  className={cn(
-                    'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
-                    pathname === item.href
-                      ? 'text-electric-cyan bg-electric-cyan/10'
-                      : 'text-cool-gray hover:text-soft-white hover:bg-slate-dark/50'
-                  )}
-                  aria-current={pathname === item.href ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden lg:flex items-center gap-6">
+            <ul className="flex items-center gap-1" role="menubar">
+              {navItems.map((item) => (
+                <li key={item.href} role="none">
+                  <Link
+                    href={item.href}
+                    role="menuitem"
+                    className={cn(
+                      'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
+                      pathname === item.href
+                        ? 'text-electric-cyan bg-electric-cyan/10'
+                        : 'text-cool-gray hover:text-soft-white hover:bg-slate-dark/50'
+                    )}
+                    aria-current={pathname === item.href ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Download CV Button */}
+            <a href="/paramio-rhuzzel-cv-updated.pdf" download>
+              <Button size="sm" className="gap-2">
+                <Download className="w-4 h-4" />
+                Download CV
+              </Button>
+            </a>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -122,6 +132,16 @@ export default function Navigation() {
                   </li>
                 ))}
               </ul>
+
+              {/* Mobile Download CV Button */}
+              <div className="px-4 pb-4">
+                <a href="/paramio-rhuzzel-cv-updated.pdf" download className="block">
+                  <Button size="lg" className="w-full gap-2">
+                    <Download className="w-5 h-5" />
+                    Download CV
+                  </Button>
+                </a>
+              </div>
             </Container>
           </motion.div>
         )}
