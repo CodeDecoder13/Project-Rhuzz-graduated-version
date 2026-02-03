@@ -154,7 +154,7 @@ export default function CertificationsPage() {
                   <Card key={cert.id} className="group">
                     <div className="flex items-start gap-4">
                       {/* Badge Icon */}
-                      <div className={`p-3 rounded-xl ${categoryColors[cert.category]?.bg || 'bg-slate-dark'} flex-shrink-0`}>
+                      <div className={`p-3 rounded-xl ${categoryColors[cert.category]?.bg || 'bg-slate-dark'} shrink-0`}>
                         <Award className={`w-6 h-6 ${categoryColors[cert.category]?.text || 'text-cool-gray'}`} />
                       </div>
 
