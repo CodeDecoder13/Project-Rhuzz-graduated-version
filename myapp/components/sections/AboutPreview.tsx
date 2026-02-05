@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, GraduationCap, Briefcase, Code2 } from 'lucide-react';
+import { ArrowRight, GraduationCap, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui';
 
 const containerVariants = {
@@ -48,14 +48,15 @@ export default function AboutPreview() {
             {/* Image Card - Left, spans full height */}
             <motion.div
               variants={itemVariants}
-              className="md:col-span-4 md:row-span-4 rounded-2xl overflow-hidden relative min-h-[320px] md:min-h-0 border border-soft-white/10 transition-all duration-300 hover:shadow-lg hover:shadow-electric-cyan/20 hover:border-electric-cyan/30 hover:-translate-y-1"
+              className="md:col-span-4 md:row-span-4 rounded-2xl overflow-hidden relative bg-midnight-navy border border-soft-white/10 transition-all duration-300 hover:shadow-lg hover:shadow-electric-cyan/20 hover:border-electric-cyan/30 hover:-translate-y-1"
             >
-              <div className="absolute inset-0 bg-linear-to-t from-midnight-navy via-midnight-navy/30 to-transparent z-10" />
+              <div className="absolute inset-0 bg-linear-to-t from-midnight-navy via-midnight-navy/30 to-transparent z-10 pointer-events-none" />
               <Image
                 src="/aboutme.JPG"
                 alt="Rhuzzel Paramio"
-                fill
-                className="object-cover object-top"
+                width={400}
+                height={500}
+                className="w-full h-full object-cover"
               />
               <div className="absolute bottom-4 left-4 right-4 z-20">
                 <h3 className="text-xl font-bold text-soft-white">Rhuzzel Paramio</h3>
@@ -69,7 +70,7 @@ export default function AboutPreview() {
               className="md:col-span-8 md:row-span-2 rounded-2xl bg-midnight-navy/60 backdrop-blur-sm border border-soft-white/10 p-5 md:p-6 flex flex-col justify-center transition-all duration-300 hover:shadow-lg hover:shadow-electric-cyan/10 hover:border-electric-cyan/30 hover:-translate-y-1"
             >
               <p className="text-cool-gray leading-relaxed text-sm md:text-base">
-                I&apos;m a software engineer who believes that great software isn&apos;t just about writing code —
+                I&apos;m a software engineer who believes that great software isn&apos;t just about writing code
                 it&apos;s about ensuring it works flawlessly. With expertise in both full-stack development and
                 quality assurance, I bring a unique perspective to building reliable, scalable applications.
               </p>
@@ -129,19 +130,6 @@ export default function AboutPreview() {
               </div>
             </motion.div>
 
-            {/* Full-Stack Developer Card */}
-            <motion.div
-              variants={itemVariants}
-              className="md:col-span-4 rounded-2xl bg-linear-to-br from-electric-cyan/10 to-neon-teal/10 backdrop-blur-sm border border-electric-cyan/20 p-4 group flex items-center gap-4 transition-all duration-300 hover:shadow-lg hover:shadow-electric-cyan/20 hover:border-electric-cyan/40 hover:-translate-y-1"
-            >
-              <div className="p-3 rounded-xl bg-electric-cyan/10 text-electric-cyan group-hover:bg-electric-cyan/20 transition-colors">
-                <Code2 size={22} />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-soft-white mb-1">Full-Stack Developer</h4>
-                <p className="text-cool-gray text-xs">Freelance & Projects</p>
-              </div>
-            </motion.div>
 
           </div>
 

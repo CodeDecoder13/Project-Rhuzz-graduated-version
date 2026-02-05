@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/rhuzzel', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/rhuzzel-paramio', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:contact@rhuzzel.dev', label: 'Email' },
+  { icon: Github, href: 'https://github.com/CodeDecoder13', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/rhuzz-6904b7187/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:boyparamio@gmail.com', label: 'Email' },
 ];
 
 const footerLinks = [

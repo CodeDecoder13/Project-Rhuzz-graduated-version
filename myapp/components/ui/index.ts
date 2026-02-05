@@ -6,3 +6,5 @@ export { default as Container } from './Container';
 export { default as ProjectModal } from './ProjectModal';
 export { default as ImageLightbox } from './ImageLightbox';
 export { default as ChatWidget } from './ChatWidget';
+export { default as WelcomeModal } from './WelcomeModal';
+export { default as CookieConsent } from './CookieConsent';

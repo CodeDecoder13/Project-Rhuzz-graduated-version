@@ -5,6 +5,7 @@ import path from 'path';
 
 export interface KnowledgeEntry {
   question: string;
+  keywords: string;
   answer: string;
   category: string;
 }
@@ -42,10 +43,8 @@ async function parsePDFsAsync(dataDir: string): Promise<KnowledgeEntry[]> {
         const parser = new PDFParse(uint8);
         const result = await parser.getText();
 
-        // Combine all page texts
         const text = result.pages.map((p: { text: string }) => p.text).join('\n\n');
 
-        // Split by double newlines or section-like patterns
         const chunks = text
           .split(/\n{2,}/)
           .map((chunk: string) => chunk.trim())
@@ -57,6 +56,7 @@ async function parsePDFsAsync(dataDir: string): Promise<KnowledgeEntry[]> {
 
           entries.push({
             question,
+            keywords: question.toLowerCase(),
             answer: chunk,
             category: 'resume',
           });
@@ -78,13 +78,11 @@ export async function loadKnowledgeBase(): Promise<KnowledgeEntry[]> {
   const dataDir = path.join(process.cwd(), 'data');
   let entries: KnowledgeEntry[] = [];
 
-  // Parse CSV
   const csvPath = path.join(dataDir, 'knowledge.csv');
   if (fs.existsSync(csvPath)) {
     entries = [...entries, ...parseCSV(csvPath)];
   }
 
-  // Parse PDFs
   const pdfEntries = await parsePDFsAsync(dataDir);
   entries = [...entries, ...pdfEntries];
 
@@ -97,10 +95,11 @@ function buildFuseIndex(entries: KnowledgeEntry[]): Fuse<KnowledgeEntry> {
 
   cachedFuse = new Fuse(entries, {
     keys: [
+      { name: 'keywords', weight: 3 },
       { name: 'question', weight: 2 },
-      { name: 'answer', weight: 1 },
+      { name: 'answer', weight: 0.5 },
     ],
-    threshold: 0.4,
+    threshold: 0.5,
     includeScore: true,
     ignoreLocation: true,
     minMatchCharLength: 2,
@@ -110,11 +109,10 @@ function buildFuseIndex(entries: KnowledgeEntry[]): Fuse<KnowledgeEntry> {
 }
 
 const SUGGESTION_QUESTIONS = [
-  'Who is Rhuzzel?',
-  'What technologies do you use?',
-  'Tell me about your projects',
+  'What is your current role?',
+  'What programming languages do you know?',
+  'What testing tools do you use?',
   'What certifications do you have?',
-  'How can I contact you?',
 ];
 
 export function searchKnowledge(
@@ -124,7 +122,7 @@ export function searchKnowledge(
   const fuse = buildFuseIndex(entries);
   const results = fuse.search(query);
 
-  if (results.length > 0 && results[0].score !== undefined && results[0].score < 0.4) {
+  if (results.length > 0 && results[0].score !== undefined && results[0].score < 0.5) {
     const best = results[0].item;
     return {
       reply: best.answer,
@@ -133,10 +131,8 @@ export function searchKnowledge(
     };
   }
 
-  // No good match
-  const categories = [...new Set(entries.map((e) => e.category))];
   return {
-    reply: `I'm not sure about that, but I can tell you about Rhuzzel's ${categories.join(', ')}!`,
+    reply: "I'm not sure about that one. Try asking about Rhuzzel's background, skills, projects, experience, certifications, or how to get in touch!",
     suggestions: SUGGESTION_QUESTIONS,
     confidence: 'low',
   };

@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation, Footer } from "@/components/layout";
 import ChatWidget from "@/components/ui/ChatWidget";
+import WelcomeModal from "@/components/ui/WelcomeModal";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,6 +85,8 @@ export default function RootLayout({
 
         <Footer />
         <ChatWidget />
+        <WelcomeModal />
+        <CookieConsent />
       </body>
     </html>
   );

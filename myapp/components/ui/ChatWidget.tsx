@@ -16,10 +16,10 @@ const WELCOME_MESSAGE: Message = {
   text: "Hi! I'm Rhuzzel's portfolio assistant. Ask me anything about his skills, projects, or experience!",
   sender: 'bot',
   suggestions: [
-    'Who is Rhuzzel?',
-    'What technologies do you use?',
-    'Tell me about your projects',
-    'How can I contact you?',
+    'What is your current role?',
+    'What programming languages do you know?',
+    'What certifications do you have?',
+    'Are you open to freelance or full-time work?',
   ],
 };
 
@@ -112,11 +112,16 @@ export default function ChatWidget() {
 
       const data = await res.json();
 
+      // Don't show suggestions if the last bot message already had suggestions (avoid loop)
+      const lastBotHadSuggestions = messages
+        .filter((m) => m.sender === 'bot')
+        .at(-1)?.suggestions?.length;
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: data.reply || "Sorry, I couldn't process that. Try asking something else!",
         sender: 'bot',
-        suggestions: data.suggestions,
+        suggestions: lastBotHadSuggestions ? undefined : data.suggestions,
       };
 
       setMessages((prev) => [...prev, botMessage]);
