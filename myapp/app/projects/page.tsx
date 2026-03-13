@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, TestTube2, Play, Globe, GitBranch, Wind, Code2 } from 'lucide-react';
+import { ExternalLink, Github, TestTube2, Play, Globe, GitBranch, Wind, Code2, Building2, Users, Shield } from 'lucide-react';
 import { Container, Card, SectionTitle, Badge, ProjectModal } from '@/components/ui';
 import type { Project } from '@/types';
 
@@ -110,6 +110,48 @@ const projects: Project[] = [
     featured: false,
     created_at: '2024-06-01',
   },
+  {
+    id: '9',
+    title: 'Construction Contractors Inc',
+    description: 'A professional web application for a construction contracting company, featuring project showcases, service listings, and client management capabilities.',
+    category: 'web-development',
+    problem: 'The construction company lacked a modern online presence to showcase their projects and services to potential clients.',
+    solution: 'Built a full-stack web application with project galleries, service pages, and a streamlined client inquiry system.',
+    result: 'Delivered a professional digital platform that effectively showcases the company\'s portfolio and streamlines client engagement.',
+    tech_stack: ['Vue 3', 'Laravel 12', 'Shadcn Vue', 'Tailwind CSS', 'PostgreSQL', 'Railway'],
+    live_url: 'https://construction-contractors-inc-production.up.railway.app',
+    image_url: '/projects/construction.png',
+    featured: false,
+    created_at: '2025-01-15',
+  },
+  {
+    id: '10',
+    title: 'DevCollab',
+    description: 'A collaborative developer platform designed to streamline team workflows, code collaboration, and project management for development teams.',
+    category: 'web-development',
+    problem: 'Development teams needed a centralized platform for seamless collaboration and project coordination.',
+    solution: 'Created a collaborative platform with real-time features for team communication, code sharing, and project tracking.',
+    result: 'Enabled efficient team collaboration with an intuitive interface that improves developer productivity and project visibility.',
+    tech_stack: ['Vue 3', 'Laravel 12', 'Shadcn Vue', 'Tailwind CSS', 'PostgreSQL', 'Railway'],
+    live_url: 'https://devcollab-production-9ce4.up.railway.app',
+    image_url: '/projects/devcollab.png',
+    featured: false,
+    created_at: '2025-02-01',
+  },
+  {
+    id: '11',
+    title: 'Eagles Fraternal Management Portal',
+    description: 'An admin portal for managing Eagles fraternal organization operations, including member management, event coordination, and organizational administration.',
+    category: 'web-development',
+    problem: 'The Eagles fraternal organization needed a centralized admin system to manage members, events, and organizational tasks efficiently.',
+    solution: 'Developed a comprehensive admin portal with member management, event scheduling, and administrative tools tailored for fraternal organization needs.',
+    result: 'Streamlined organizational management with a dedicated admin portal that simplifies member tracking and event coordination.',
+    tech_stack: ['Vue 3', 'Laravel 12', 'Shadcn Vue', 'Tailwind CSS', 'PostgreSQL', 'Railway'],
+    live_url: 'https://eagles-portal-management-production.up.railway.app/admin',
+    image_url: '/projects/frat.png',
+    featured: false,
+    created_at: '2025-02-20',
+  },
 ];
 
 const projectFallbacks: Record<string, { icon: typeof Code2; gradient: string }> = {
@@ -119,6 +161,9 @@ const projectFallbacks: Record<string, { icon: typeof Code2; gradient: string }>
   '6': { icon: GitBranch, gradient: 'from-orange-500/20 to-amber-600/20' },
   '7': { icon: Wind, gradient: 'from-sky-500/20 to-indigo-600/20' },
   '8': { icon: Code2, gradient: 'from-teal-500/20 to-cyan-600/20' },
+  '9': { icon: Building2, gradient: 'from-amber-500/20 to-yellow-600/20' },
+  '10': { icon: Users, gradient: 'from-violet-500/20 to-purple-600/20' },
+  '11': { icon: Shield, gradient: 'from-rose-500/20 to-red-600/20' },
 };
 
 type FilterType = 'all' | 'web-development' | 'qa-automation' | 'capstone';
